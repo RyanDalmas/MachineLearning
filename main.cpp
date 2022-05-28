@@ -4,10 +4,11 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include "algorithm.cpp"
 
 int main()
 {
-
+/*
     int FeatureCount = -1;
     int SelectAlgorithm = -1;
 
@@ -63,7 +64,13 @@ int main()
 
     } while (true);
 
-    
+    Algorithm* _a = new Algorithm(FeatureCount, SelectAlgorithm);
+
+    _a->run();
+*/
+    Algorithm* _a = new Algorithm(1, 1);
+
+    _a->greedyForward();
 
     system("pause");
     return 0;

@@ -1,18 +1,38 @@
 #ifndef __ALGORITHM_H__
 #define __ALGORITHM_H__
 
-class Algorithm {
+#include "node.h"
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "Node.cpp"
+#include "Feature.cpp"
 
-    private:
+class Algorithm
+{
 
-    (int *) classifier;
+private:
+    int (Algorithm::*classifier)(const std::vector<Feature*> t);
 
+    int featureCount, sAlgorithm;
 
+public:
+    Algorithm(int _featureCount, int _sAlgorithm) : featureCount(_featureCount), sAlgorithm(_sAlgorithm) {
+        srand (time(NULL));
 
-    public:
-    Algorithm();
-    ~Algorithm();
+        this->classifier = evaluate;
+    }
+    ~Algorithm() {
 
+    }
+
+    void run();
+
+    void greedyForward();
+
+    int evaluate(const std::vector<Feature*> t);
+
+    void print(std::vector<Feature *> p);
 };
 
 #endif
