@@ -5,74 +5,60 @@
 #include <string>
 #include <regex>
 #include "algorithm.cpp"
+#include "file_system.cpp"
+#include "classifier.cpp"
+#include "validator.cpp"
 
 int main()
 {
-/*
-    int FeatureCount = -1;
-    int SelectAlgorithm = -1;
 
-    int Tries_1 = 0, Tries_2 = 0;
+    system("CLS");
 
-    do
-    {
+    std::cout << "=== Welcome to Ryan's Machine Learning Project ===" << std::endl;
+    std::cout << std::endl;
+    std::cout << "(1) Small test data set" << std::endl;
+    std::cout << "(2) Large test data set" << std::endl;
+    std::cout << "(3) Small personal set" << std::endl;
+    std::cout << "(4) Large personal set" << std::endl;
+    std::cout << std::endl;
+    std::cout << "-> ";
 
-        system("CLS");
+    int Select = -1;
 
-        std::cout << "Welcome to Ryan Dalmas's Feature Selection Algorithm" << std::endl
-                  << std::endl;
+    std::cin >> Select;
 
-        (Tries_2 > 0) ? std::cout << "Enter Feature Count (" << Tries_2 << ") -> " : std::cout << "Enter Feature Count -> ";
+    std::string file_name = "";
 
-        std::string UserInput = "";
-        std::string user_input_validate = "^[0-9]+$";
+    switch (Select) {
+    case 1:
+        file_name = "small_data_set.txt";
+        break;
+    case 2:
+        file_name = "large_data_set.txt";
+        break;
+    case 3:
+        file_name = "small_ds_personal.txt";
+        break;
+    case 4:
+        file_name = "large_ds_personal.txt";
+        break;
+    default:
+        break;
+    }
 
-        std::cin >> UserInput;
+    File_System *f = new File_System();
 
-        if (std::regex_match(UserInput, std::regex(user_input_validate)))
-        {
-            FeatureCount = std::stoi(UserInput);
-            break;
-        }
+    std::vector<Class_Object> training_data = f->load_data(file_name);
 
-    } while (true);
+    int FeatureCount = training_data[0].feature_set.size();
 
-    do
-    {
+    Algorithm* a = new Algorithm(FeatureCount);
 
-        system("CLS");
+    system("CLS");
 
-        std::cout << "Welcome to Ryan Dalmas's Feature Selection Algorithm" << std::endl << std::endl;
+    a->greedyForward(training_data);
+    a->greedyBackwards(training_data);
 
-        std::cout << "(1) Forward Selection" << std::endl;
-        std::cout << "(2) Backward Elimination" << std::endl;
-
-        std::cout << std::endl;
-
-        (Tries_2 > 0) ? std::cout << "Select Algorithm (" << Tries_2 << ") -> " : std::cout << "Select Algorithm -> ";
-
-        std::string UserInput = "";
-        std::string user_input_validate = "^[0-9]+$";
-
-        std::cin >> UserInput;
-
-        if (std::regex_match(UserInput, std::regex(user_input_validate)))
-        {
-            SelectAlgorithm = std::stoi(UserInput);
-            break;
-        }
-
-    } while (true);
-
-    Algorithm* _a = new Algorithm(FeatureCount, SelectAlgorithm);
-
-    _a->run();
-*/
-    Algorithm* _a = new Algorithm(1, 1);
-
-    _a->greedyForward();
-
-    system("pause");
     return 0;
 }
 
