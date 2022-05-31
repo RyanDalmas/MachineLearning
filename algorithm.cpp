@@ -157,7 +157,7 @@ void Algorithm::printI(int* p)
 
     for (int i = 0; i < this->featureCount; i++)
     {
-        (p[i]) ? std::cout << i+1 << "|" : std::cout << "";
+        std::cout << p[i] << " ";
     }
 
     std::cout << "}";
