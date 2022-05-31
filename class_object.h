@@ -8,7 +8,7 @@
 struct Class_Object {
     int cl = -1;
     int id = -1;
-    std::vector<std::pair<int, float>> feature_set;
+    std::vector<std::pair<int, double>> feature_set;
     void print() {
         std::cout << "Instance " << this->id << std::endl;
         std::cout << "> Class: " << this->cl << std::endl;
@@ -23,7 +23,7 @@ struct Class_Object {
         t.cl = (int)std::stof(split_string[0]);
         for (int i = 1; i < split_string.size(); i++)
         {
-            t.feature_set.push_back(std::pair<int, float>(i, std::stof(split_string[i])));
+            t.feature_set.push_back(std::pair<int, double>(i, (double)std::stof(split_string[i])));
         }
         return t;
     }
@@ -39,19 +39,31 @@ struct Class_Object {
 
         return sqrt(running_sum);
     }
-    float euclidean_distance(Class_Object t, const std::vector<Feature*> set) {
+    double euclidean_distance(Class_Object t, const std::vector<Feature*> set) {
 
         if(t.feature_set.size() != this->feature_set.size()) std::cout << "ERROR, FEATURES CANNOT BE COMPUTED";
 
-        float running_sum = 0.0f;
-
+        double running_sum = 0.0;
+        #pragma omp parallel for    
         for(int i = 0; i < this->feature_set.size(); i++) {
             bool Check = false;
-            for(int z = 0; z < set.size(); z++) Check = ((i) == set[z]->getFeature()) ? true || Check : false || Check;
 
-            //if(Check) std::cout << "Feature #" << t.feature_set[i].first << " used." << std::endl;
+            for(int z = 0; z < set.size(); z++) Check = ((i) == set[z]->getFeature()) ? (true) : (false || Check);
 
-            if(Check) running_sum += pow((t.feature_set[i].second - (double)this->feature_set[i].second), 2);
+            if(Check) running_sum += pow(((double)t.feature_set[i].second - (double)this->feature_set[i].second), 2);
+        }
+
+        return sqrt(running_sum);
+    }
+    double euclidean_distanceI(Class_Object t, int* set) {
+
+        if(t.feature_set.size() != this->feature_set.size()) std::cout << "ERROR, FEATURES CANNOT BE COMPUTED";
+
+        double running_sum = 0.0;
+
+        #pragma omp parallel for    
+        for(int i = 0; i < this->feature_set.size(); i++) {
+            if(set[i]) running_sum += pow(((double)t.feature_set[i].second - (double)this->feature_set[i].second), 2);
         }
 
         return sqrt(running_sum);

@@ -18,6 +18,7 @@ public:
     // Input: a feature subset, a classifier, and the data set
     // Output: model accuracy using inputs
     double leave_one_out(std::vector<Feature *> set, std::vector<Class_Object> training_data);
+    double leave_one_outI(int* set, std::vector<Class_Object> training_data);
 };
 
 #endif

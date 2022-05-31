@@ -24,6 +24,10 @@ public:
     std::vector<Feature *> complement(std::vector<Feature *> input);
 
     void print(std::vector<Feature *>);
+    void printI(int* p);
+
+    double evaluateI(int* set, std::vector<Class_Object> training_data);
+    void greedyForwardI(std::vector<Class_Object>);
 };
 
 #endif

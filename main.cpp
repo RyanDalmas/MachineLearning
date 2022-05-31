@@ -56,7 +56,7 @@ int main()
 
     system("CLS");
 
-    a->greedyForward(training_data);
+    a->greedyForwardI(training_data);
     a->greedyBackwards(training_data);
 
     return 0;

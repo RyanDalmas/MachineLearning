@@ -32,11 +32,12 @@ std::vector<Class_Object> File_System::load_data(std::string file_name)
     }
 
     strm.close();
+    std::cout << "Data set read from file." << std::endl;
     return this->normalize(r);
 }
 
 std::vector<Class_Object> File_System::normalize(std::vector<Class_Object> set) {
-    std::vector<std::pair<int,float>> mins(set[0].feature_set), maxs(set[0].feature_set);
+    std::vector<std::pair<int,double>> mins(set[0].feature_set), maxs(set[0].feature_set);
 
     for(int i = 0; i < set.size(); i++) {
         for(int j = 0; j < set[i].feature_set.size(); j++) {
@@ -51,7 +52,7 @@ std::vector<Class_Object> File_System::normalize(std::vector<Class_Object> set) 
             set[i].feature_set[j].second = ((set[i].feature_set[j].second - mins[j].second)/(maxs[j].second - mins[j].second));
         }
     }
-
+    std::cout << "Data set normalized." << std::endl;
     return set;
 }
 
