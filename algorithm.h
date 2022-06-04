@@ -28,6 +28,9 @@ public:
 
     double evaluateI(int* set, std::vector<Class_Object> training_data);
     void greedyForwardI(std::vector<Class_Object>);
+
+    int* complementI(int* input);
+    void greedyBackwardsI(std::vector<Class_Object> training_data);
 };
 
 #endif
