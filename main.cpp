@@ -54,9 +54,10 @@ int main()
 
     Algorithm* a = new Algorithm(FeatureCount);
 
-    system("CLS");
+    //system("CLS");
+    std::cout << std::endl;
 
-    //a->greedyForwardI(training_data);
+    a->greedyForwardI(training_data);
     a->greedyBackwardsI(training_data);
 
     return 0;

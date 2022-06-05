@@ -219,11 +219,11 @@ void Algorithm::greedyForwardI(std::vector<Class_Object> training_data)
 
     for (int Counter = 0; Counter < this->featureCount; Counter++)
     {
-        std::cout << "Feature split #" << Counter << std::endl;
+        //std::cout << "Feature split #" << Counter << std::endl;
         // Generate
         for (int f_counter = 0; f_counter < this->featureCount; f_counter++)
         {
-            std::cout << ".";
+            //std::cout << ".";
             int* t = new int[this->featureCount];
             for(int i = 0; i < this->featureCount; i++) t[i] = f_set[0][i];
 
@@ -243,13 +243,13 @@ void Algorithm::greedyForwardI(std::vector<Class_Object> training_data)
             //printI(f_set[f_counter]);
             for(int i = 0; i < this->featureCount; i++) sum += f_set[f_counter][i];
             if(sum == 0) {
-                std::cout << "Skipping..." << std::endl;
+                //std::cout << "Skipping..." << std::endl;
                 continue;
             }
 
-               std::cout << "trying ";
+             //std::cout << "trying ";
              //printI(f_set[f_counter]);
-             std::cout << f_counter << " of " << f_set.size() << std::endl;
+             //std::cout << f_counter << " of " << f_set.size() << std::endl;
 
             double eval = evaluateI(f_set[f_counter], training_data);
 
@@ -267,7 +267,7 @@ void Algorithm::greedyForwardI(std::vector<Class_Object> training_data)
                 delete running_max_set;
                 running_max_set = new int[this->featureCount];
                 for(int i = 0; i < this->featureCount; i++) running_max_set[i] = f_set[f_counter][i];
-                printI(running_max_set);
+                //printI(running_max_set);
             }
         }
 
@@ -283,6 +283,7 @@ void Algorithm::greedyForwardI(std::vector<Class_Object> training_data)
 
     printI(max_accuracy_set);
 
+    std::cout << std::endl;
     std::cout << std::endl;
 }
 
@@ -300,11 +301,11 @@ void Algorithm::greedyBackwardsI(std::vector<Class_Object> training_data)
 
     for (int Counter = 0; Counter < this->featureCount; Counter++)
     {
-        std::cout << "Feature split #" << Counter << std::endl;
+        //std::cout << "Feature split #" << Counter << std::endl;
         // Generate
         for (int f_counter = 0; f_counter < this->featureCount; f_counter++)
         {
-            std::cout << ".";
+            //std::cout << ".";
             int* t = new int[this->featureCount];
             for(int i = 0; i < this->featureCount; i++) t[i] = f_set[0][i];
 
@@ -324,13 +325,13 @@ void Algorithm::greedyBackwardsI(std::vector<Class_Object> training_data)
             //printI(f_set[f_counter]);
             for(int i = 0; i < this->featureCount; i++) sum += f_set[f_counter][i];
             if(sum == 0) {
-                std::cout << "Skipping..." << std::endl;
+                //std::cout << "Skipping..." << std::endl;
                 continue;
             }
 
-               std::cout << "trying ";
+             //std::cout << "trying ";
              //printI(f_set[f_counter]);
-             std::cout << f_counter << " of " << f_set.size() << std::endl;
+             //std::cout << f_counter << " of " << f_set.size() << std::endl;
 
             double eval = evaluateI(this->complementI(f_set[f_counter]), training_data);
 
@@ -348,7 +349,7 @@ void Algorithm::greedyBackwardsI(std::vector<Class_Object> training_data)
                 delete running_max_set;
                 running_max_set = new int[this->featureCount];
                 for(int i = 0; i < this->featureCount; i++) running_max_set[i] = f_set[f_counter][i];
-                printI(running_max_set);
+                //printI(running_max_set);
             }
         }
 
@@ -364,6 +365,7 @@ void Algorithm::greedyBackwardsI(std::vector<Class_Object> training_data)
 
     printI(max_accuracy_set);
 
+    std::cout << std::endl;
     std::cout << std::endl;
 }
 
